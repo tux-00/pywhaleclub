@@ -12,13 +12,20 @@ class Client():
         headers = {'Authorization': 'Bearer {}'.format(api_token)}
         return headers
 
+    def convert_list_to_str(self, l):
+        if type(l) == list:
+            return ','.join(l)
+        return l
+
     def get_markets(self, symbol_list):
         """Returns market information for one or more markets."""
+        symbol_list = self.convert_list_to_str(symbol_list)
         r = requests.get(self._url + 'markets/' + symbol_list, headers=self._headers)
         return r.json()
 
     def get_price(self, symbol_list):
         """Returns the current bid and ask prices for one or more markets."""
+        symbol_list = self.convert_list_to_str(symbol_list)
         r = requests.get(self._url + 'price/' + symbol_list, headers=self._headers)
         return r.json()
 
@@ -77,10 +84,12 @@ class Client():
 
     def close_position(self, pid_list):
         """Close one or multiple active positions at market price."""
+        pid_list = self.convert_list_to_str(pid_list)
         r = requests.put(self._url + 'position/close/' + pid_list, headers=self._headers)
         return r.json()
 
     def cancel_position(self, pid_list):
+        pid_list = self.convert_list_to_str(pid_list)
         """Cancel one or multiple pending positions."""
         r = requests.put(self._url + 'position/cancel/' + pid_list, headers=self._headers)
         return r.json()
