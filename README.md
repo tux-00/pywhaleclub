@@ -14,6 +14,7 @@ c = Client(api_token_demo)
 
 print(c.get_balance())
 print(c.list_positions('active'))
+print(c.get_markets(['BTC-USD', 'ETH-USD']))
 ```
 
 ## Function list
