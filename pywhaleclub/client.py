@@ -6,6 +6,7 @@ class Client():
     def __init__(self, api_token):
         self._headers = self._get_headers(api_token)
         self._url = 'https://api.whaleclub.co/v1/'
+        self.max_market_req = 5
 
     def _get_headers(self, api_token):
         """Construct header with api_token variable."""
@@ -17,14 +18,31 @@ class Client():
             return ','.join(l)
         return l
 
-    def get_markets(self, symbol_list):
+    def get_markets(self, symbol_list, multi_req=False):
         """Returns market information for one or more markets."""
+
+        if multi_req:
+            markets = {}
+            for i in range(self.max_market_req, len(symbol_list) + self.max_market_req, self.max_market_req):
+                r = self.get_markets(symbol_list=','.join(symbol_list[i - 5:i]), multi_req=False)
+                markets.update(r)
+            return markets
+
         symbol_list = self._convert_list_to_str(symbol_list)
         r = requests.get(self._url + 'markets/' + symbol_list, headers=self._headers)
+
         return r.json()
 
-    def get_price(self, symbol_list):
+    def get_price(self, symbol_list, multi_req=False):
         """Returns the current bid and ask prices for one or more markets."""
+
+        if multi_req:
+            markets = {}
+            for i in range(self.max_market_req, len(symbol_list) + self.max_market_req, self.max_market_req):
+                r = self.get_price(symbol_list=','.join(symbol_list[i - 5:i]), multi_req=False)
+                markets.update(r)
+            return markets
+
         symbol_list = self._convert_list_to_str(symbol_list)
         r = requests.get(self._url + 'price/' + symbol_list, headers=self._headers)
         return r.json()
