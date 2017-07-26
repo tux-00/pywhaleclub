@@ -19,8 +19,8 @@ print(c.get_markets(['BTC-USD', 'ETH-USD']))
 
 ## Function list
 ```
-get_markets(symbol_list)
-get_price(symbol_list)
+get_markets(symbol_list, multi_req=False)
+get_price(symbol_list, multi_req=False)
 get_balance()
 get_transactions(ttype, limit=None)
 set_position(direction, market, leverage, size, entry_price=None, stop_loss=None, stop_loss_trailing=None, take_profit=None)
