@@ -23,6 +23,7 @@ class Client():
 
         if multi_req:
             markets = {}
+            # Cut symbol_list to get 5 symbols in a request
             for i in range(self.max_market_req, len(symbol_list) + self.max_market_req, self.max_market_req):
                 r = self.get_markets(symbol_list=','.join(symbol_list[i - 5:i]), multi_req=False)
                 markets.update(r)
