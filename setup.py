@@ -3,7 +3,7 @@
 from setuptools import setup
 
 setup(name='pywhaleclub',
-      version='1.0',
+      version='1.1',
       description='Whaleclub.co python API wrapper',
       url='https://github.com/tux-00/pywhaleclub',
       author='Raphaël B',
