@@ -17,7 +17,7 @@ print(c.list_positions('active'))
 print(c.get_markets(['BTC-USD', 'ETH-USD']))
 
 # Use multi req paramater to get more than 5 currencies at once (5 is the current limit of Whaleclub).
-print(c.get_markets(['BTC-USD', 'ETH-USD']), multi_req=True)
+print(c.get_markets(['BTC-USD', 'DASH-BTC', 'ETH-BTC', 'ETH-USD', 'LTC-USD', 'XMR-BTC']), multi_req=True)
 ```
 
 ## Function list
