@@ -9,7 +9,7 @@ class Client():
         self.max_market_req = 5
 
     def _get_headers(self, api_token):
-        """Construct header with api_token variable."""
+        """Construct header with api_token."""
         headers = {'Authorization': 'Bearer {}'.format(api_token)}
         return headers
 
